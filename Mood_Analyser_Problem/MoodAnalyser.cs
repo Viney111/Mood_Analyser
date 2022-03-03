@@ -8,6 +8,7 @@ namespace Mood_Analyser_Problem
 {
     public class MoodAnalyser
     {
+        //Field for Comparing input message
         string message1 = "Sad";
         public string AnalysingMood(string message)
         {
