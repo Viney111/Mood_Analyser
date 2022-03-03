@@ -9,16 +9,26 @@ namespace Mood_Analyser_Problem
     public class MoodAnalyser
     {
         //Field for Comparing input message
-        string message1 = "Sad";
-        public string AnalysingMood(string message)
+        string message1;
+
+        public MoodAnalyser(string message1)
         {
-            if (message.ToUpper().Contains(message1.ToUpper()))
+            this.message1 = message1;
+        }
+
+        public string AnalysingMood()
+        {
+            if (this.message1.ToUpper().Contains("Happy".ToUpper()))
             {
-                return message1.ToUpper();
+                return "Happy".ToUpper();
+            }
+            if (this.message1.ToUpper().Contains("sad".ToUpper()))
+            {
+                return "Sad".ToUpper();
             }
             else
             {
-                return "Happy".ToUpper();
+                return "Null";
             }
         }
     }

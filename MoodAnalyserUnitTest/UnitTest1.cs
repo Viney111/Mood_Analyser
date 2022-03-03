@@ -7,22 +7,22 @@ namespace MoodAnalyserUnitTest
     public class UnitTest1
     {
         [TestMethod]
-        public void GivingSadMessage_RetunsSad()
+        public void GivingSadMessage_ReturnsSad()
         {
             //Arrange
-            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in sad mood");
             //ACT
-            string result = moodAnalyser.AnalysingMood("I am in Sad mood");
+            string result = moodAnalyser.AnalysingMood();
             //Assert
             Assert.AreEqual("SAD", result);
         }
         [TestMethod]
-        public void GivingAnyMoodMessage_RetunsHappy()
+        public void GivingHappyMessage_RetunsHappy()
         {
             //Arrange
-            MoodAnalyser moodAnalyser = new MoodAnalyser();
+            MoodAnalyser moodAnalyser = new MoodAnalyser("I am in happy mood");
             //ACT
-            string result = moodAnalyser.AnalysingMood("I am in any mood");
+            string result = moodAnalyser.AnalysingMood();
             //Assert
             Assert.AreEqual("HAPPY", result);
         }
