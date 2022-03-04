@@ -18,17 +18,20 @@ namespace Mood_Analyser_Problem
 
         public string AnalysingMood()
         {
-            if (this.message1.ToUpper().Contains("Happy".ToUpper()))
+            try
+            {
+                if (this.message1.ToUpper().Contains("Happy".ToUpper()))
+                {
+                    return "Happy".ToUpper();
+                }
+                else
+                {
+                    return "Sad".ToUpper();
+                }
+            }
+            catch (NullReferenceException)
             {
                 return "Happy".ToUpper();
-            }
-            if (this.message1.ToUpper().Contains("sad".ToUpper()))
-            {
-                return "Sad".ToUpper();
-            }
-            else
-            {
-                return "Null";
             }
         }
     }
