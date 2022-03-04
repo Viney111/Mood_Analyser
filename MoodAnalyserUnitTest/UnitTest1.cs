@@ -9,32 +9,42 @@ namespace MoodAnalyserUnitTest
         [TestMethod]
         public void GivingSadMessage_ReturnsSad()
         {
-            //Arrange
             MoodAnalyser moodAnalyser = new MoodAnalyser("I am in sad mood");
-            //ACT
             string result = moodAnalyser.AnalysingMood();
-            //Assert
             Assert.AreEqual("SAD", result);
         }
         [TestMethod]
         public void GivingHappyMessage_RetunsHappy()
         {
-            //Arrange
             MoodAnalyser moodAnalyser = new MoodAnalyser("I am in happy mood");
-            //ACT
             string result = moodAnalyser.AnalysingMood();
-            //Assert
             Assert.AreEqual("HAPPY", result);
         }
         [TestMethod]
-        public void GivingNULLMessage_RetunsHappy()
+        public void GivingNULLMessage_ThrowsMoodAnalysisExceptionNullMessage()
         {
-            //Arrange
-            MoodAnalyser moodAnalyser = new MoodAnalyser(null);
-            //ACT
-            string result = moodAnalyser.AnalysingMood();
-            //Assert
-            Assert.AreEqual("HAPPY", result);
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+                string result = moodAnalyser.AnalysingMood();
+            }
+            catch (MoodAnalysisException ex)
+            {
+                Assert.AreEqual("Message should not be null", ex.Message);
+            }
+        }
+        [TestMethod]
+        public void GivingEMPTYMessage_ThrowsMoodAnalysisExceptionEmptyMessage()
+        {
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser("");
+                string result = moodAnalyser.AnalysingMood();
+            }
+            catch(MoodAnalysisException ex)
+            {
+                Assert.AreEqual("Message should not be empty", ex.Message);
+            }
         }
     }
 
