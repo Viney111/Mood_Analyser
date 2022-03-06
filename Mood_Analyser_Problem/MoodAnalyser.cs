@@ -8,19 +8,29 @@ namespace Mood_Analyser_Problem
 {
     public class MoodAnalyser
     {
-        //Field for Comparing input message
+        #region Fields
         string message1;
+        #endregion
+
+        #region Constructor
         public MoodAnalyser(string message1)
         {
             this.message1 = message1;
         }
+        public MoodAnalyser()
+        {
+
+        }
+        #endregion
+
+        #region Methods
         public string AnalysingMood()
         {
             try
             {
                 if (this.message1.ToUpper().Equals(string.Empty))
                 {
-                    throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.EMPTY_MESSAGE, "Message should not be empty");
+                    throw new MoodAnalysisException(ExceptionType.EMPTY_MESSAGE, "Message should not be empty");
                 }
                 if (this.message1.ToUpper().Contains("Happy".ToUpper()))
                 {
@@ -33,8 +43,45 @@ namespace Mood_Analyser_Problem
             }
             catch (NullReferenceException)
             {
-                throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.NULL_MESSAGE, "Message should not be null");
+                throw new MoodAnalysisException(ExceptionType.NULL_MESSAGE, "Message should not be null");
             }
         }
+        public string AnalysingMood(string message)
+        {
+            try
+            {
+                if (message.ToUpper().Equals(string.Empty))
+                {
+                    throw new MoodAnalysisException(ExceptionType.EMPTY_MESSAGE, "Message should not be empty");
+                }
+                if (message.ToUpper().Contains("Happy".ToUpper()))
+                {
+                    return "Happy".ToUpper();
+                }
+                else
+                {
+                    return "Sad".ToUpper();
+                }
+            }
+            catch (NullReferenceException)
+            {
+                throw new MoodAnalysisException(ExceptionType.NULL_MESSAGE, "Message should not be null");
+            }
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is MoodAnalyser))
+            {
+                return false;
+            }
+            MoodAnalyser moodAnalyseObject = (MoodAnalyser)obj;
+            return this.message1 == moodAnalyseObject.message1;
+        }
+        #endregion
     }
 }
+
