@@ -68,6 +68,9 @@ namespace Mood_Analyser_Problem
                 throw new MoodAnalysisException(ExceptionType.NULL_MESSAGE, "Message should not be null");
             }
         }
+        #endregion
+
+        #region Equals Methods
         public override bool Equals(object obj)
         {
             if (obj == null)

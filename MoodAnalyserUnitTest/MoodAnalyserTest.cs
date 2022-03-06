@@ -6,7 +6,7 @@ namespace MoodAnalyserUnitTest
     [TestClass]
     public class MoodAnalyserTest
     {
-        #region TestMethods
+        #region TestMethodsfor UC1 to UC3
         [TestMethod]
         public void GivingSadMessage_ReturnsSad()
         {
@@ -47,20 +47,23 @@ namespace MoodAnalyserUnitTest
                 Assert.AreEqual("Message should not be empty", ex.Message);
             }
         }
+        #endregion
+
+        #region TestMethodsfor UC4
         [TestMethod]
-        public void GivingClassNameProper_ReturnsMoodAnalyserObject()
+        public void GivingClassNameProper_ReturnsMoodAnalyserObject_ParameterlessConstructor()
         {
             MoodAnalyser moodAnalyser = new MoodAnalyser();
-            object obj = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser");
+            object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser");
             Assert.AreEqual(moodAnalyser, obj);
         }
         [TestMethod]
-        public void GivingClassNameImProper_ThrowsMoodAnalysisException()
+        public void GivingClassNameImProper_ThrowsMoodAnalysisException_ParameterlessConstructor()
         {
             try
             {
                 MoodAnalyser moodAnalyser = new MoodAnalyser();
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyser.MoodAnalyser", "MoodAnalyser");
+                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser.MoodAnalyser", "MoodAnalyser");
             }
             catch (MoodAnalysisException ex)
             {
@@ -68,12 +71,48 @@ namespace MoodAnalyserUnitTest
             }
         }
         [TestMethod]
-        public void GivingClassNameProperButConstructorNameImproper_ThrowsMoodAnalysisException()
+        public void GivingClassNameProperButConstructorNameImproper_ThrowsMoodAnalysisException_ParameterlessConstructor()
         {
             try
             {
                 MoodAnalyser moodAnalyser = new MoodAnalyser();
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserObject("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalysers");
+                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalysers");
+            }
+            catch (MoodAnalysisException ex)
+            {
+                Assert.AreEqual("No such Method Error", ex.Message);
+            }
+        }
+        #endregion
+
+        #region TestMethodsfor UC5
+        [TestMethod]
+        public void GivingClassNameProper_ReturnsMoodAnalyserObject_ParametrizedConstructor()
+        {
+            MoodAnalyser moodAnalyser = new MoodAnalyser("s");
+            object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser");
+            Assert.AreEqual(moodAnalyser, obj);
+        }
+        [TestMethod]
+        public void GivingClassNameImProper_ThrowsMoodAnalysisException_ParametrizedConstructor()
+        {
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser("s");
+                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser.MoodAnalyser", "MoodAnalyser");
+            }
+            catch (MoodAnalysisException ex)
+            {
+                Assert.AreEqual("No such class found", ex.Message);
+            }
+        }
+        [TestMethod]
+        public void GivingClassNameProperButConstructorNameImproper_ThrowsMoodAnalysisException_ParametrizedConstructor()
+        {
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser("s");
+                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalysers");
             }
             catch (MoodAnalysisException ex)
             {
