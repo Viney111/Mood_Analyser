@@ -20,9 +20,9 @@ namespace Mood_Analyser_Problem
                 try
                 {
                     Assembly assembly = Assembly.GetExecutingAssembly();
-                    Type moodAnalyserType = Type.GetType(className);
+                    Type moodAnalyserType = assembly.GetType(className);
                     object[] args = { "s" };
-                    var resultant = Activator.CreateInstance(moodAnalyserType,args);
+                    object resultant = Activator.CreateInstance(moodAnalyserType,args);
                     return resultant;
                 }
                 catch
@@ -47,8 +47,8 @@ namespace Mood_Analyser_Problem
                 try
                 {
                     Assembly assembly = Assembly.GetExecutingAssembly();
-                    Type moodAnalyserType = Type.GetType(className);
-                    var resultant = Activator.CreateInstance(moodAnalyserType);
+                    Type moodAnalyserType = assembly.GetType(className);
+                    object resultant = Activator.CreateInstance(moodAnalyserType);
                     return resultant;
                 }
                 catch

@@ -70,21 +70,6 @@ namespace Mood_Analyser_Problem
         }
         #endregion
 
-        #region Equals Methods
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-            if (!(obj is MoodAnalyser))
-            {
-                return false;
-            }
-            MoodAnalyser moodAnalyseObject = (MoodAnalyser)obj;
-            return this.message1 == moodAnalyseObject.message1;
-        }
-        #endregion
     }
 }
 
