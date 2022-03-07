@@ -9,7 +9,7 @@ namespace Mood_Analyser_Problem
     public class MoodAnalyser
     {
         #region Fields
-        string message1;
+        public string message1;
         #endregion
 
         #region Constructor

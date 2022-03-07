@@ -22,7 +22,7 @@ namespace Mood_Analyser_Problem
                     Assembly assembly = Assembly.GetExecutingAssembly();
                     Type moodAnalyserType = assembly.GetType(className);
                     object[] args = { message };
-                    object resultant = Activator.CreateInstance(moodAnalyserType,args);
+                    object resultant = Activator.CreateInstance(moodAnalyserType, args);
                     return resultant;
                 }
                 catch
@@ -79,6 +79,32 @@ namespace Mood_Analyser_Problem
             catch (NullReferenceException)
             {
                 throw new MoodAnalysisException(ExceptionType.NO_SUCH_METHOD_ERROR, "No such method is present in this class");
+            }
+        }
+        #endregion
+
+        #region Method for Setting Field
+        public static string SetField(string value, string fieldName)
+        {
+            try
+            {
+                MoodAnalyser obj = (MoodAnalyser)CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser",value);
+                Type type = typeof(MoodAnalyser);
+                FieldInfo field = type.GetField(fieldName);
+                if (field != null)
+                {
+                    if (value == null)
+                    {
+                        throw new MoodAnalysisException(ExceptionType.NULL_MESSAGE, "Message should not be null");
+                    }
+                    field.SetValue(obj,value);
+                    return obj.message1;
+                }
+                throw new MoodAnalysisException(ExceptionType.FIELD_NOT_FOUND, "Field name should not be null");
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
             }
         }
         #endregion
