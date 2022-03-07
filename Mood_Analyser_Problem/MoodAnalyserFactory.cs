@@ -12,7 +12,7 @@ namespace Mood_Analyser_Problem
     public class MoodAnalyserFactory
     {
         #region Method for Creating object of Parameterized Constructor
-        public static object CreateMoodAnalyserObjectParameterizedConstructor(string className, string Constructor)
+        public static object CreateMoodAnalyserObjectParameterizedConstructor(string className, string Constructor, string message)
         {
             string[] findingConstructorFromClassName = className.Split('.');
             if (findingConstructorFromClassName[1] == Constructor)
@@ -21,7 +21,7 @@ namespace Mood_Analyser_Problem
                 {
                     Assembly assembly = Assembly.GetExecutingAssembly();
                     Type moodAnalyserType = assembly.GetType(className);
-                    object[] args = { "s" };
+                    object[] args = { message };
                     object resultant = Activator.CreateInstance(moodAnalyserType,args);
                     return resultant;
                 }
