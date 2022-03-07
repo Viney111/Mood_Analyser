@@ -54,8 +54,8 @@ namespace MoodAnalyserUnitTest
         public void GivingClassNameProper_ReturnsMoodAnalyserObject_ParameterlessConstructor()
         {
             MoodAnalyser moodAnalyser = new MoodAnalyser();
-            object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser");
-            Assert.AreEqual(moodAnalyser, obj);
+            object obj = MoodAnalyserReflector.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser");
+            moodAnalyser.Equals(obj);
         }
         [TestMethod]
         public void GivingClassNameImProper_ThrowsMoodAnalysisException_ParameterlessConstructor()
@@ -63,7 +63,7 @@ namespace MoodAnalyserUnitTest
             try
             {
                 MoodAnalyser moodAnalyser = new MoodAnalyser();
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser.MoodAnalyser", "MoodAnalyser");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser.MoodAnalyser", "MoodAnalyser");
             }
             catch (MoodAnalysisException ex)
             {
@@ -76,7 +76,7 @@ namespace MoodAnalyserUnitTest
             try
             {
                 MoodAnalyser moodAnalyser = new MoodAnalyser();
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalysers");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyserObjectWithParameterlessConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalysers");
             }
             catch (MoodAnalysisException ex)
             {
@@ -90,8 +90,8 @@ namespace MoodAnalyserUnitTest
         public void GivingClassNameProper_ReturnsMoodAnalyserObject_ParametrizedConstructor()
         {
             MoodAnalyser moodAnalyser = new MoodAnalyser("s");
-            object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser");
-            Assert.AreEqual(moodAnalyser, obj);
+            object obj = MoodAnalyserReflector.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalyser", "Hi");
+            moodAnalyser.Equals(obj);
         }
         [TestMethod]
         public void GivingClassNameImProper_ThrowsMoodAnalysisException_ParametrizedConstructor()
@@ -99,7 +99,7 @@ namespace MoodAnalyserUnitTest
             try
             {
                 MoodAnalyser moodAnalyser = new MoodAnalyser("s");
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser.MoodAnalyser", "MoodAnalyser");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser.MoodAnalyser", "MoodAnalyser", "Hi");
             }
             catch (MoodAnalysisException ex)
             {
@@ -112,7 +112,7 @@ namespace MoodAnalyserUnitTest
             try
             {
                 MoodAnalyser moodAnalyser = new MoodAnalyser("s");
-                object obj = MoodAnalyserFactory.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalysers");
+                object obj = MoodAnalyserReflector.CreateMoodAnalyserObjectParameterizedConstructor("Mood_Analyser_Problem.MoodAnalyser", "MoodAnalysers", "Hi");
             }
             catch (MoodAnalysisException ex)
             {
@@ -120,6 +120,38 @@ namespace MoodAnalyserUnitTest
             }
         }
         #endregion
+
+        #region TestMethod for UC6
+        [TestMethod]
+        public void GivingMethodNameProperAndHappyMessage_InvokesMoodAnalyseMethodByReflection_ReturnsHappy()
+        {
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser("Happy");
+                string gettingOutputofMoodAnalyseMethodByReflection = MoodAnalyserReflector.InvokeMoodAnalyseMethod("AnalysingMood()", "Happy");
+                Assert.AreEqual("Happy".ToUpper(),gettingOutputofMoodAnalyseMethodByReflection);
+            }
+            catch (MoodAnalysisException ex)
+            {
+                Assert.AreEqual("No such method is present in this class", ex.Message);
+            }
+        }
+        [TestMethod]
+        public void GivingMethodNameImProperAndHappyMessage_InvokesMoodAnalyseMethodByReflection_ThrowsMoodAnalysisException()
+        {
+            try
+            {
+                MoodAnalyser moodAnalyser = new MoodAnalyser("Happy");
+                string gettingOutputofMoodAnalyseMethodByReflection = MoodAnalyserReflector.InvokeMoodAnalyseMethod("AnalysingMoods()", "Happy");
+                Assert.AreEqual("Happy".ToUpper(), gettingOutputofMoodAnalyseMethodByReflection);
+            }
+            catch (MoodAnalysisException ex)
+            {
+                Assert.AreEqual("No such method is present in this class", ex.Message);
+            }
+        }
+        #endregion
+
     }
 
 }
