@@ -180,7 +180,7 @@ namespace MoodAnalyserUnitTest
             }
         }
         [TestMethod]
-        public void GivingNullMessage_SettingwithProperField_UsingReflection_ThrowNoSuchFieldException()
+        public void GivingNullMessage_SettingwithProperField_UsingReflection_ThrowMessageShouldNotNullException()
         {
             MoodAnalyserReflector reflector = new MoodAnalyserReflector();
             string value = null;
