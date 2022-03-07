@@ -129,7 +129,7 @@ namespace MoodAnalyserUnitTest
             {
                 MoodAnalyser moodAnalyser = new MoodAnalyser("Happy");
                 string gettingOutputofMoodAnalyseMethodByReflection = MoodAnalyserReflector.InvokeMoodAnalyseMethod("AnalysingMood()", "Happy");
-                Assert.AreEqual("Happy".ToUpper(),gettingOutputofMoodAnalyseMethodByReflection);
+                Assert.AreEqual("Happy".ToUpper(), gettingOutputofMoodAnalyseMethodByReflection);
             }
             catch (MoodAnalysisException ex)
             {
@@ -152,6 +152,49 @@ namespace MoodAnalyserUnitTest
         }
         #endregion
 
+        #region TestMethod for UC7
+        [TestMethod]
+        public void GivingHappyMessage_SettingwithProperField_UsingReflection_ReturnHappy()
+        {
+            MoodAnalyserReflector reflector = new MoodAnalyserReflector();
+            string value = "Happy";
+            string fieldName = "message1";
+            string resultant = "";
+            resultant = MoodAnalyserReflector.SetField(value, fieldName);
+            Assert.AreEqual("Happy", resultant);
+        }
+        [TestMethod]
+        public void GivingHappyMessage_SettingwithImProperField_UsingReflection_ThrowNoSuchFieldException()
+        {
+            MoodAnalyserReflector reflector = new MoodAnalyserReflector();
+            string value = "Happy";
+            string fieldName = "between";
+            string resultant = "";
+            try
+            {
+                resultant = MoodAnalyserReflector.SetField(value, fieldName);
+            }
+            catch(System.Exception e)
+            {
+                Assert.AreEqual("Field name should not be null",e.Message);
+            }
+        }
+        [TestMethod]
+        public void GivingNullMessage_SettingwithProperField_UsingReflection_ThrowNoSuchFieldException()
+        {
+            MoodAnalyserReflector reflector = new MoodAnalyserReflector();
+            string value = null;
+            string fieldName = "message1";
+            string resultant = "";
+            try
+            {
+                resultant = MoodAnalyserReflector.SetField(value, fieldName);
+            }
+            catch (System.Exception e)
+            {
+                Assert.AreEqual("Message should not be null", e.Message);
+            }
+        }
+        #endregion
     }
-
 }
