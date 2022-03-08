@@ -9,7 +9,6 @@ namespace Mood_Analyse_Problem
     {
         static void Main(string[] args)
         {
-
         }
     }
 }
